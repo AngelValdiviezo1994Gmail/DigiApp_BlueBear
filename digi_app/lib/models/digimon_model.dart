@@ -11,16 +11,16 @@ class DigimonModel {
         required this.pageable,
     });
 
-    factory DigimonModel.fromRawJson(String str) => DigimonModel.fromJson(json.decode(str));
+    factory DigimonModel.fromJson(String str) => DigimonModel.fromMap(json.decode(str));
 
-    String toRawJson() => json.encode(toJson());
+    String toJson() => json.encode(toMap());
 
-    factory DigimonModel.fromJson(Map<String, dynamic> json) => DigimonModel(
+    factory DigimonModel.fromMap(Map<String, dynamic> json) => DigimonModel(
         content: List<DigiDataModel>.from(json["content"].map((x) => DigiDataModel.fromJson(x))),
         pageable: Pageable.fromJson(json["pageable"]),
     );
 
-    Map<String, dynamic> toJson() => {
+    Map<String, dynamic> toMap() => {
         "content": List<dynamic>.from(content.map((x) => x.toJson())),
         "pageable": pageable.toJson(),
     };

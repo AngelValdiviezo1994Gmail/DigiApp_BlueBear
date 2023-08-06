@@ -1,6 +1,5 @@
 import 'package:digi_app/services/index.dart';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:digi_app/screens/index.dart';
 import 'package:provider/provider.dart';
@@ -37,6 +36,14 @@ class DigimonAppState extends State<DigimonApp> {
           create: (_) => ProspectoTypeService('', ''),
           lazy: false,
         ),
+        ChangeNotifierProvider(
+          create: (_) => AutenticacionService(),
+          lazy: false,
+        ),
+        ChangeNotifierProvider(
+          create: (_) => DigimonService(),
+          lazy: false,
+        ),
       ],
       child: MaterialApp(
         builder: (varContext, varChild) {
@@ -62,7 +69,7 @@ class DigimonAppState extends State<DigimonApp> {
             AutenticacionErrorScreen.routerName: (_) => AutenticacionErrorScreen(null,'', '','',false,false,'',''),
             CheckAuthScreen.routerName: (_) => const CheckAuthScreen(),
             RegistroUsuarioScreen.routerName: (_) => RegistroUsuarioScreen(),
-            ContraseniaScreen.routerName: (_) => ContraseniaScreen(numIdentificacion: ''),
+            ContraseniaScreen.routerName: (_) => ContraseniaScreen(correoUser: ''),
           }
       ),
     );

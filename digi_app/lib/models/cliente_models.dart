@@ -63,8 +63,7 @@ class ClienteType {
   double? totalEgresos;
   double? netoPagar;
 
-  factory ClienteType.fromJson(String str) =>
-      ClienteType.fromMap(json.decode(str));
+  factory ClienteType.fromJson(String str) => ClienteType.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 

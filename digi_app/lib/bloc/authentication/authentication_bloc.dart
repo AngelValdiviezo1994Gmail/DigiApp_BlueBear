@@ -18,16 +18,6 @@ import 'package:equatable/equatable.dart';
 part 'authentication_event.dart';
 part 'authentication_state.dart';
 
-/*
-class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> {
-  AuthenticationBloc() : super(AuthenticationInitial()) {
-    on<AuthenticationEvent>((event, emit) {
-      // TODO: implement event handler
-    });
-  }
-}
-*/
-
 const storage = FlutterSecureStorage();
 FeatureApp objFeatureAppAuth = FeatureApp();
 
@@ -35,46 +25,30 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
   int obtieneToken = 0;
   UsuarioType objUsBloc = UsuarioType(
     cedula: '',
-    codArea: '',
-    codScc: '',
-    codUdn: '',
     codigo: '',
-    colaborador: '',
-    idJefe: '',
-    idReemplazo: '',
-    jefe: '',
-    reemplazo: '',
-    scc: '',
-    udn: '',
     fotoPerfil: '',
-    alias: '',
     celular: '',
     codigoConvivencia: '',
     codigoIntegracion: '',
     direccion: '',
     estado: '',
     fechaRegistro: DateTime.now(),
-    indentificacionFamiliar: '',
     latitud: 0,
     longitud: 0,
     servicioActivo: true,
     sesionColaborador: '',
-    tipoIdentificacionFamiliar: '',
     apellidos: 'Test',
     area: 'Test',
     cargo: 'Test',
-    codigoEmpleado: 616,
     correo: 'Test',
     empresa: 'Test',
     fechaIngreso: DateTime.now(),
-    grupoEmpresarial: 'Test',
     identificacion: 'Test',
     nombres: 'Test',
     rucEmpresa: 'Test',
     sueldo: 2000,
     tipoContrato: 'Test',
     tipoIdentificacion: 'Test',
-    codEmpresa: 'Test',
     dispositivoId: 'Test',
     latitudLocalidad: 0,
     longitudLocalidad: 0,

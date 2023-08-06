@@ -184,46 +184,50 @@ class AutenticacionService extends ChangeNotifier{
     }
   }
 
-  autenticacion(String varNumIdVal, String password) async { 
-    final baseURL = '${endPointLogin}usuarios/login';
+  autenticacion(String emailEntra, String password) async { 
+    //final baseURL = '${endPointLogin}usuarios/login';
 
-    String tipoCliente = await storage.read(key: 'tipoCliente') ?? '';
-    //String tokenIdDevice = await FirebaseMessaging.instance.getToken() ?? '';
-
+/*
     final response = await http.post(
-      Uri.parse(baseURL),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
+      Uri.parse(baseURL),      
       body: jsonEncode(
         <String, String>
         {
-          "email": tipoCliente,
-          "password": password,
+          "email": emailEntra,
+          "password": password
         }
       ),
     );
+    */
+
+    final baseURL = '${endPointLogin}usuarios/autenticar/$emailEntra/$password';//endPoint;//20
+
+    final response = await http.get(Uri.parse(baseURL));
+    if(response.statusCode != 200) return null;
 
     var reponseRs = response.body;
     final clienteRsp = ClientTypeResponse.fromJson(reponseRs);//aquí va a variar el objeto de respuesta cuando se cree el token por el api
-    tokenUser = clienteRsp.data;
-
-    objRspInicioSesion = clienteRsp;
+    tokenUser = clienteRsp.token;
+    print('Ruta: $baseURL');
+    print('Usuario: $emailEntra');
+    print('Clave: $password');
+    print('Consulta token: $reponseRs');
     storage.write(key: 'jwtEnrolApp', value: tokenUser);
-    bool traeDataUser = false;//await datosEmpleado(varNumIdVal);
+    /*
+    bool traeDataUser = false;
     traeDataUser = await datosEmpleado(varNumIdVal);
     
 
     if(!traeDataUser) {
       storage.write(key: 'jwtEnrolApp', value: '');
     }
-
+*/
     notifyListeners();
   }
 
   reenviaCorreoActivacion(String numIdent, String email) async {
 
-    final baseURL = '${endPoint}Clientes/ReenviarActivacion?Identificacion=$numIdent&Correo=$email';
+    final baseURL = '${endPointLogin}Clientes/ReenviarActivacion?Identificacion=$numIdent&Correo=$email';
 
     final varResponse = await http.put(Uri.parse(baseURL));
     if(varResponse.statusCode != 200) return null;

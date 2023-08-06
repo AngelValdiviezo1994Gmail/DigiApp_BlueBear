@@ -11,13 +11,13 @@ import 'package:intl/intl.dart';
 
 import '../_environments/index.dart';
 
-const storageProspecto = FlutterSecureStorage();
-MensajesAlertas objMensajesProspectoService = MensajesAlertas();
-ResponseValidation objResponseValidationService = ResponseValidation();
+const digiStorage = FlutterSecureStorage();
+MensajesAlertas digiMensajesProspectoService = MensajesAlertas();
+ResponseValidation digiResponseValidationService = ResponseValidation();
 
-class ProspectoTypeService extends ChangeNotifier{
+class DigimonService extends ChangeNotifier{
 
-  final String endPoint = CadenaConexion().apiLogin;
+  final String endPoint = CadenaConexion().apiDigimons;
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   ProspectoType? objRspProsp;
@@ -26,6 +26,7 @@ class ProspectoTypeService extends ChangeNotifier{
   String varPassWordActual = '';
   String varPassWord = '';
   String varPassWordConfirm = '';
+  DigimonModel? digiModel;
 
   bool isOscuredConfirm = true;
   bool get varIsOscuredConfirm => isOscuredConfirm;
@@ -41,10 +42,6 @@ class ProspectoTypeService extends ChangeNotifier{
     notifyListeners();
   }
 
-//  GlobalKey<FormState> FormKey = new GlobalKey<FormState>();
-  //String Var_Ruta_Url = 'http://192.168.15.155:5204/api/v1/Prospectos/0920693975';
-  //String FechaNacimiento = '';
-  //String Genero = '';
   String varDireccion = '';
   String varCorreo = '';
   String varUbicacionLat = '';
@@ -83,76 +80,22 @@ class ProspectoTypeService extends ChangeNotifier{
     notifyListeners();
   }
 
-  ProspectoTypeService(String tipoIdent, String numIdent){
-    getProspecto(tipoIdent, numIdent);
-  }
 
-
-  bool isValidFormPasword(){
-    if(varPassWord == '' || varPassWordConfirm == ''){
-      return false;
-    }
-    else{
-      if(varPassWord != varPassWordConfirm){
-        return false;
-      }
-      else {
-        return true;
-      }
-    }
-  }
-
-  bool isValidForm(){
-    return formKey.currentState?.validate() ?? false;
-  }
-
-  bool isParamsForm(){
-    String pattern = r'^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{10,20}$';
-    RegExp regExp  = RegExp(pattern);
-    return regExp.hasMatch(varPassWord) ? true : false;
-  }
-
-  String mensajeError(){
-    String pattern = r'^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{10,20}$';
-    RegExp regExp  = RegExp(pattern);
-    String varMensajeValidacion = regExp.hasMatch(varPassWord) ? '' : 'Clave no cumple con los parámetros solicitados';
-    
-    if(varPassWord != varPassWordConfirm){
-      varMensajeValidacion = ' Las contraseñas deben coincidir';
-    }
-    return varMensajeValidacion;
-  }
-
-
- getProspecto(String tipoIdent,String numIdent) async {
+  getDigimons(String cantidadPage) async {
     try{
-
-      String tipoProspecto = await storageProspecto.read(key: 'tipoCliente') ?? '';
-      final baseURL = '${endPoint}Prospectos/$tipoProspecto/$tipoIdent/$numIdent';
+      final baseURL = '$endPoint?pageSize=$cantidadPage';//endPoint;//20
 
       final varResponse = await http.get(Uri.parse(baseURL));
       if(varResponse.statusCode != 200) return null;
 
-      final prospRsp = ProspectoTypeResponse.fromJson(varResponse.body);
-      varObjTipoRsp = prospRsp;
-      if(prospRsp.succeeded && varObjTipoRsp!.data != null) {
-        
-        varObjTipoRsp!.data!.tipoCliente = tipoProspecto;
-
-        if(prospRsp.statusCode == objResponseValidationService.responseExitoGet && prospRsp.succeeded){
-          objRspProsp = prospRsp.data;
-        }
-      } else {
-        prospRsp.succeeded = false;
-        varObjTipoRsp!.succeeded = false;
-      }
-
+      final prospRsp = DigimonModel.fromJson(varResponse.body);
+      digiModel = prospRsp;
       
       notifyListeners();
     }
     on SocketException catch (_) {
       Fluttertoast.showToast(
-        msg: objMensajesProspectoService.mensajeFallaInternet,
+        msg: digiMensajesProspectoService.mensajeFallaInternet,
         toastLength: Toast.LENGTH_LONG,
         gravity: ToastGravity.TOP,
         timeInSecForIosWeb: 5,
@@ -181,9 +124,13 @@ class ProspectoTypeService extends ChangeNotifier{
     return frmValido;
   }
 
-  registraProspecto(String nombre, String correo, String clave) async {
-/*    
+  registraProspecto(ProspectoType objLlenoProsp) async {
+    String fechaNacimientoProsp = DateFormat('yyyy-MM-dd').format(objLlenoProsp.fechaNacDate);
+
     final baseURL = '${endPoint}Clientes/CreateCliente';
+
+    String latitudString = objLlenoProsp.latitud.toString();
+    String longitudString = objLlenoProsp.longitud.toString();
 
     final response = await http.post(
         Uri.parse(baseURL),
@@ -192,23 +139,22 @@ class ProspectoTypeService extends ChangeNotifier{
           },
           body: jsonEncode(<String, dynamic>
           {
-            "fechaNacimiento": nombre,
-            "correo": correo,
-            "password": clave
+            "tipoidentificacion": objLlenoProsp.tipoIdentificacion,
+            "identificacion": objLlenoProsp.identificacion,
+            "genero": objLlenoProsp.genero,
+            "latitud": latitudString,
+            "longitud": longitudString,
+            "direccion": objLlenoProsp.direccion,
+            "fechaNacimiento": fechaNacimientoProsp,
+            "correo": objLlenoProsp.email,
+            "password": varPassWord,      
+            "tipoCliente": objLlenoProsp.tipoCliente,
           }
         ),
       );
-*/
 
-//http://localhost:5000/usuarios/crear-cuenta-url/correo00@correo00.com/prueba00/123456
-
-    final baseURL = '${endPoint}usuarios/crear-cuenta-url/$correo/$nombre/$clave';
-
-    final response = await http.post(Uri.parse(baseURL));
-    if(response.statusCode != 200) return null;
-
-    var reponseRs = response.body;
-    final clienteRsp = ClientTypeResponse.fromJson(reponseRs);
+      final prospRsp = ClientTypeResponse.fromJson(response.body);//aquí va a variar el objeto de respuesta cuando se cree el token por el api
+      varObjRspRegistro = prospRsp;
     
     notifyListeners();
   }

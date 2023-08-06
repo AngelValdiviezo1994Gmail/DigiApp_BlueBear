@@ -1,11 +1,12 @@
 
-
-//ignore: must_be_immutable
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:digi_app/screens/index.dart';
+import 'package:digi_app/services/index.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:digi_app/_environments/environment.prod.dart';
+import 'package:provider/provider.dart';
 import '../models/index.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 const storagePrincipalScreen = FlutterSecureStorage();
@@ -35,11 +36,14 @@ class PrincipalScreenState extends State<PrincipalScreen> {
   int varIndexMenu = 0;
 
   final lstPages = <Widget>[
-    //HomeScreen(),    
+    ListadoDigimons()
   ];
 
   @override
   Widget build(BuildContext context) {
+
+    Size sizePrincipal = MediaQuery.of(context).size;
+    final authService = Provider.of<AutenticacionService>(context, listen: false);
 
     return SafeArea(
       child: WillPopScope(
@@ -52,57 +56,135 @@ class PrincipalScreenState extends State<PrincipalScreen> {
             leading: 
            
               IconButton(
-                icon: const Icon(Icons.person),
-                color: varIndexMenu == -1 ? objColoresAppPrincipal.digiNaranja : Colors.white,
-                onPressed: () {
-                  setState(() {
-                    varIndexMenu = -1;
-                  });
-                },
-              ),
-          
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                CachedNetworkImage(
-                  placeholder: (context, url) => Image.asset(
-                    'assets/no-image.jpg', //"assets/loadingEnrolApp.gif",
-                    height: 80.0,
-                    width: 80.0,
-                  ),
-                  fadeInCurve: Curves.bounceIn,
-                  width: 150,
-                  imageUrl: '${objCadConPrincipalApp.endPointImagenes}LogoBlanco.png',
-                  errorWidget: (
-                    (context, error, stackTrace) {
-                      return Container(
-                        color: Colors.transparent,
-                        child: Image.asset('assets/no-image.jpg'),
-                      );
-                    }
-                  )
-                ),
-              ],
-            ),
-            elevation: 0,
-            actions: [
-              const SizedBox(width: 50),
-              //Bocina
-              
-              IconButton(
-                icon: const Icon(
-                  Icons.campaign_outlined,
-                  color: Colors.white, 
-                ),
+                icon: const Icon(Icons.logout_rounded),
                 color: Colors.white,
-                tooltip: 'Anuncios',
-                onPressed: () async {
+                onPressed: () {
+                  showDialog(
+                      barrierDismissible: false,
+                      context: context,
+                      builder: (context) => SimpleDialog(
+                          alignment: Alignment.center,
+                          children: [
+                            SimpleDialogOption(
+                                onPressed: () {},
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Container(
+                                      width: sizePrincipal.width * 0.21,
+                                      height: sizePrincipal.height * 0.15,
+                                      decoration: const BoxDecoration(
+                                          image: DecorationImage(
+                                            image: AssetImage('assets/gifAlertWarning.gif'),
+                                            fit: BoxFit.cover,
+                                          ),
+                                          color: Colors.transparent),
+                                      alignment: Alignment.center,
+                                    ),
+                                    Container(
+                                        alignment: Alignment.topCenter,
+                                        color: Colors.transparent,
+                                        width: sizePrincipal.width * 0.41,
+                                        height: sizePrincipal.height * 0.15,
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment
+                                                  .spaceBetween,
+                                          children: [
+                                            Container(
+                                              color: Colors.transparent,
+                                              width: sizePrincipal.width * 0.43,
+                                              height: sizePrincipal.height * 0.09,
+                                              alignment: Alignment.center,
+                                              child: const AutoSizeText(
+                                                '¿Estás seguro que deseas cerrar sesión?',
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                  color: Color.fromARGB(255, 0, 0, 0),
+                                                  fontFamily: 'Montserrat',
+                                                  fontWeight: FontWeight.bold
+                                                ),
+                                                maxLines: 3,
+                                                presetFontSizes: [
+                                                  16,
+                                                  14,
+                                                  12,
+                                                  10
+                                                ],
+                                              ),
+                                            ),
+                                            Container(
+                                              color: Colors.transparent,
+                                              width: sizePrincipal.width * 0.41,
+                                              height: sizePrincipal.height * 0.06,
+                                              alignment: Alignment.topCenter,
+                                              child: Row(
+                                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                children: [
+                                                  Container(
+                                                    width: sizePrincipal.width * 0.18,
+                                                    height: sizePrincipal.height * 0.04,
+                                                    decoration: BoxDecoration(
+                                                      borderRadius: BorderRadius.circular(5),
+                                                      color: Colors.red[400],
+                                                    ),
+                                                    child: TextButton(
+                                                        onPressed: () async {
+                                                          Navigator.of(context, rootNavigator: true).pop();
+                                                        },
+                                                        child: const AutoSizeText(
+                                                          'NO',
+                                                          maxLines: 1,
+                                                          style: TextStyle(color: Colors.white),
+                                                          presetFontSizes: [
+                                                            12,
+                                                            10,
+                                                            8,
+                                                            6
+                                                          ],
+                                                        )),
+                                                  ),
+                                                  Container(
+                                                    width: sizePrincipal.width * 0.18,
+                                                    height: sizePrincipal.height * 0.04,
+                                                    decoration: BoxDecoration(
+                                                      borderRadius: BorderRadius.circular(5),
+                                                      color: Colors.green[400],
+                                                    ),
+                                                    child: TextButton(
+                                                        onPressed: () async {
+                                                          authService.logOut();
+
+                                                          Future.microtask(
+                                                            () => Navigator.pushReplacement(
+                                                              context,
+                                                              CupertinoPageRoute(builder:(context) => const SplashScreen()),
+                                                            ),
+                                                          );
+                                                        },
+                                                        child: const AutoSizeText(
+                                                          'SÍ',
+                                                          maxLines: 1,
+                                                          style: TextStyle(
+                                                            color: Colors.white
+                                                          ),
+                                                          presetFontSizes: [ 12, 10, 8, 6],
+                                                        )),
+                                                  ),
+                                                ],
+                                              ),
+                                            )
+                                          ],
+                                        )),
+                                  ],
+                                )),
+                          ]),
+                    );
                   
                 },
               ),
-            
-            ],
+          
+            elevation: 0,
           ),
           body: PageView(
             physics: const NeverScrollableScrollPhysics(),

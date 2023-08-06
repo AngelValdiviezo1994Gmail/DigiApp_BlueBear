@@ -21,7 +21,7 @@ import '../../services/index.dart';
 import '../../ui/index.dart';
 import '../index.dart';
 
-String numIdVal = '';
+String CorreoUsuario = '';
 bool cargandoPagina = false;
 ResponseValidation objResponseValidation = ResponseValidation();
 bool esEnConstruccion = false;
@@ -30,10 +30,10 @@ ColoresApp objColorsAppContrasenia = ColoresApp();
 
 //ignore: must_be_immutable
 class ContraseniaScreen extends StatefulWidget {
-  String numIdentificacion = '';
+  String correoUser = '';
 
-  ContraseniaScreen({Key? key, required numIdentificacion}) : super(key: key) {
-    numIdVal = numIdentificacion;
+  ContraseniaScreen({Key? key, required correoUser}) : super(key: key) {
+    CorreoUsuario = correoUser;
   }
 
   static const String routerName = 'contraseniaScreen';
@@ -227,57 +227,35 @@ class PaswordEvntLog extends StatelessWidget {
                     );
                     return;
                   }
-                  await loginForm.autenticacion(numIdVal, loginForm.passWord);
+                  await loginForm.autenticacion(CorreoUsuario, loginForm.passWord);
 
-                  await Future.delayed(const Duration(seconds: 2));
+                  //await Future.delayed(const Duration(seconds: 2));
                   
-                  if (loginForm.objRspInicioSesion!.statusCode == objResponseValidation.responseNoRegistraPost || loginForm.objRspInicioSesion!.statusCode == objResponseValidation.responseErrorRegistroPost) {
-                    if(loginForm.objRspInicioSesion!.message.toLowerCase().contains('activ')) {
-                      
-                      await loginForm.getClienteUser(numIdVal);
-                      
-                      loginForm.varIsLoading = false;
+                  final storageLogin = const FlutterSecureStorage();
+                  String tokenUser = await storageLogin.read(key: 'jwtEnrolApp') ?? '';
 
-                      Navigator.push(
-                          context,
-                          CupertinoPageRoute(
-                            builder: (context) => 
-                              AutenticacionErrorScreen(null,loginForm.objRspInicioSesion?.message ?? 'Recuerda que para iniciar sesión debes estar suscrito','','activaServicio.png',false, !loginForm.objRspInicioSesion!.message.toLowerCase().contains('activar') ? true : false,loginForm.objRspInicioSesion!.message.toLowerCase().contains('activ') ? numIdVal : '','')
-                          ),
-                        );
-                    
-                    } else {
-                      loginForm.varIsLoading = false;
-                      Navigator.push(
+                  print('Token mostrar: $tokenUser');
+
+                  if (tokenUser.isEmpty) {
+                    Navigator.push(
                       context,
-                        CupertinoPageRoute(
-                            builder: (context) => AutenticacionErrorScreen(null,
-                                loginForm.objRspInicioSesion?.message ??
-                                    'Error al iniciar sesión',
-                                '','claveIncorrecta.png',false,false,'','')),
-                      );
-                    }
+                      CupertinoPageRoute(
+                        builder: (context) => 
+                          AutenticacionErrorScreen(null,'Credenciales incorrectas.','','claveIncorrecta.png',false,false,'','') 
+                      ),
+                    );
                   } else {
-                    if (loginForm.objRspUsuarioDatos == null || !loginForm.objRspUsuarioDatos!.succeeded || loginForm.objRspUsuario == null) {
-                      Navigator.push(
-                        context,
-                        CupertinoPageRoute(
-                          builder: (context) => 
-                            AutenticacionErrorScreen(null,loginForm.objRspUsuarioDatos?.message ?? '','','claveIncorrecta.png',false,false,'','') 
-                        ),
-                      );
-                    } else {
 
-                      Future.microtask(() => Navigator.pushReplacement(
-                          context,
-                          PageRouteBuilder(
-                            pageBuilder: (_, __, ___) => PrincipalScreen(),
-                            transitionDuration: const Duration(seconds: 0),
-                          )
+                    Future.microtask(() => Navigator.pushReplacement(
+                        context,
+                        PageRouteBuilder(
+                          pageBuilder: (_, __, ___) => PrincipalScreen(),
+                          transitionDuration: const Duration(seconds: 0),
                         )
-                      );
-                    }
+                      )
+                    );
                   }
+                  
                   loginForm.varIsLoading = false;
                   FocusScope.of(context).unfocus(); //para cerrar teclado del celular
                 }
