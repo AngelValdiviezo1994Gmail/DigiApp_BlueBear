@@ -234,8 +234,6 @@ class PaswordEvntLog extends StatelessWidget {
                   final storageLogin = const FlutterSecureStorage();
                   String tokenUser = await storageLogin.read(key: 'jwtDigimon') ?? '';
 
-                  print('Token mostrar: $tokenUser');
-
                   if (tokenUser.isEmpty) {
                     Navigator.push(
                       context,
@@ -245,11 +243,10 @@ class PaswordEvntLog extends StatelessWidget {
                       ),
                     );
                   } else {
-
                     Future.microtask(() => Navigator.pushReplacement(
                         context,
                         PageRouteBuilder(
-                          pageBuilder: (_, __, ___) => PrincipalScreen(),
+                          pageBuilder: (_, __, ___) => PrincipalScreen(correo: CorreoUsuario),
                           transitionDuration: const Duration(seconds: 0),
                         )
                       )

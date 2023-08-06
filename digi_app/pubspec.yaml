@@ -28,7 +28,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  flutter_layout_grid: ^2.0.4
+  flutter_wall_layout: ^2.1.1
   flutter_awesome_alert_box: ^2.1.1
   page_transition: ^2.0.9
   simple_animations: ^4.2.0
@@ -39,8 +39,8 @@ dependencies:
   auto_size_text: ^3.0.0
   equatable: ^2.0.5
   local_auth: ^2.1.6
-  #http: ^1.1.0
-  http: ^0.13.5
+  http: ^1.1.0
+  #http: ^0.13.5
   package_info_plus: ^4.1.0
   connectivity_plus: ^4.0.2
   flutter_secure_storage: ^8.0.0

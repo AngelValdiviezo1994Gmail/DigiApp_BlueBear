@@ -187,14 +187,15 @@ class AutenticacionService extends ChangeNotifier{
     final baseURL = '${endPointLogin}usuarios/autenticar/$emailEntra/$password';//endPoint;//20
 
     final response = await http.post(Uri.parse(baseURL));
-    print('Respuesta: ${response.body}');
+    
     if(response.statusCode != 200) return null;
 
     var reponseRs = response.body;
     final clienteRsp = ClientTypeResponse.fromJson(reponseRs);//aquí va a variar el objeto de respuesta cuando se cree el token por el api
     tokenUser = clienteRsp.token;
-
+    varCorreo = emailEntra;
     storage.write(key: 'jwtDigimon', value: tokenUser);
+    storage.write(key: 'correoUser', value: emailEntra);
     
     notifyListeners();
   }
@@ -213,6 +214,7 @@ class AutenticacionService extends ChangeNotifier{
 
   Future logOut() async {
     await storage.delete(key: 'jwtDigimon');
+    await storage.delete(key: 'correoUser');
     return;
   }
 

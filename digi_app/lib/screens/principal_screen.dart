@@ -12,13 +12,16 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 const storagePrincipalScreen = FlutterSecureStorage();
 CadenaConexion objCadConPrincipalApp = CadenaConexion();
 ColoresApp objColoresAppPrincipal = ColoresApp();
+String correoGen = '';
 
 //ignore: must_be_immutable
 class PrincipalScreen extends StatefulWidget {
   static const String routerName = 'principalScreen';
-  UsuarioType? objetoUser;
+  String? correo;
 
-  PrincipalScreen({Key? key}) : super(key: key);
+  PrincipalScreen({Key? key, correo}) : super(key: key) {
+    correoGen = correo ?? '';
+  }
 
   @override
   PrincipalScreenState createState() => PrincipalScreenState();
@@ -185,6 +188,18 @@ class PrincipalScreenState extends State<PrincipalScreen> {
               ),
           
             elevation: 0,
+
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  width: sizePrincipal.width * 0.75,
+                  alignment: Alignment.center,
+                  child: AutoSizeText(correoGen,style: TextStyle(color: Colors.white),),
+                )
+              ]
+            ),
           ),
           body: PageView(
             physics: const NeverScrollableScrollPhysics(),
