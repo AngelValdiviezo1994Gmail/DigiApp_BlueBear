@@ -26,5 +26,5 @@ class CadenaConexion {
   final String endPointImagenes = 'https://imagenes.enrolapp.ec/Archivos/Riasem/EnrolApp/imagenes/';
   final String apiEndPointEcommerce = 'https://apiecommerce.enrolapp.ec/api/v1/';
   final String apiEndPointEvalCore = 'https://apievalcore.enrolapp.ec/api/v1/';
-  
+  final String apiLogin = 'https://crm-backend-delta.vercel.app/';
 }

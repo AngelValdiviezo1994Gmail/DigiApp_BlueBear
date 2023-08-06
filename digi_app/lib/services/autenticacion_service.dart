@@ -15,6 +15,8 @@ class AutenticacionService extends ChangeNotifier{
   final String endPointLdap = CadenaConexion().apiEndPointLdap;
   final String endPointWorkFlow = CadenaConexion().apiEndPointWorkFlow;
 
+  final String endPointLogin = CadenaConexion().apiLogin;
+
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   ProspectoTypeResponse? objTipoRsp;
   ClienteValidoTypeResponse? objClienteValido;
@@ -74,6 +76,7 @@ class AutenticacionService extends ChangeNotifier{
 
   String varCedula = '';
   String varPasaporte = '';
+  String varCorreo = '';
 
 
   bool isOscured = true;
@@ -182,7 +185,7 @@ class AutenticacionService extends ChangeNotifier{
   }
 
   autenticacion(String varNumIdVal, String password) async { 
-    final baseURL = '${endPointLdap}LdapUser/AuthenticateLdapUser';
+    final baseURL = '${endPointLogin}usuarios/login';
 
     String tipoCliente = await storage.read(key: 'tipoCliente') ?? '';
     //String tokenIdDevice = await FirebaseMessaging.instance.getToken() ?? '';
@@ -195,10 +198,8 @@ class AutenticacionService extends ChangeNotifier{
       body: jsonEncode(
         <String, String>
         {
-          "tipoCliente": tipoCliente,
-          "identificacion": varNumIdVal,
+          "email": tipoCliente,
           "password": password,
-          //"idDevice": tokenIdDevice
         }
       ),
     );

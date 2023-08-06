@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:auto_size_text/auto_size_text.dart';
+//ignore: unused_import
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +46,6 @@ class SplashScreenState extends State<SplashScreen>{
         ),
         child: Column(
           children: <Widget>[
-            //const SizedBox(height: 22,),
             Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -92,7 +92,7 @@ class SplashScreenState extends State<SplashScreen>{
               height: sizeScreenLst.height * 0.1,
               child: const Center(
                 child: AutoSizeText(
-                  'Estás a un paso de vivir la experiencia',
+                  'Estás a un paso de vivir la aventura DIGIMON.',
                   style: TextStyle(color: Colors.white),
                   presetFontSizes: [36,34,32,30,28,26,24,22,20,18,16,14,12,10,8],
                   maxLines: 2,
@@ -101,42 +101,6 @@ class SplashScreenState extends State<SplashScreen>{
               ),
             ),
 
-
-            Container(
-              color: Colors.transparent,
-              height: sizeScreenLst.height * 0.2,
-              child: Row(
-                children: [
-                  Expanded(
-                    child:  
-
-                    CachedNetworkImage(
-                      height: sizeScreenLst.height * 0.1,//70,
-                      width: sizeScreenLst.width * 0.15,//80,
-                      placeholder: (context,url) =>
-                        Image.asset("assets/loadingEnrolApp.gif",
-                          height: 40.0,
-                          width: sizeScreenLst.width * 0.2,
-                        ),
-                        imageUrl: '${objCadConSplashScreen.endPointImagenes}IcEnRolApp.png',
-                        fadeInCurve: Curves.bounceIn,
-                        errorWidget: ((context,error,stackTrace) {
-                          return Container(
-                            color: Colors.transparent,
-                            child: Image.asset('assets/no-image.jpg'),
-                          );
-                        }
-                      ),
-                    ),
-                        
-            
-            
-                  ),
-                ],
-              ),
-            ),
-
-
           ]
         ),
       ),
@@ -144,68 +108,6 @@ class SplashScreenState extends State<SplashScreen>{
       Container(
         width: sizeScreenLst.width, 
         height: sizeScreenLst.height,
-        //child: Image.asset('assets/SplBnv2.png',matchTextDirection: true,height: 60,),
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-             image: AssetImage('assets/SplBnv2.png'),
-             fit: BoxFit.fill
-          ),
-        ),
-        child: Column(
-          children: <Widget>[
-            
-            Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                    const Text(''),
-                    MaterialButton(
-                      shape: const CircleBorder(),
-                      disabledColor: Colors.white,
-                      elevation: 0,
-                      color: Colors.transparent,
-                      child: Container(color: Colors.transparent, child: const Icon(Icons.close,color: Colors.white,size: 30,),),
-                      onPressed: () => exit(0), 
-                    ),
-                ],
-            ),
-            
-            
-            Container(
-              color: Colors.transparent,
-              width: sizeScreenLst.width * 0.75,
-              height: sizeScreenLst.height * 0.28,
-            ),
-            
-            Container(
-              color: Colors.transparent,
-              width: sizeScreenLst.width * 0.58,
-              height: sizeScreenLst.height * 0.45,
-              alignment: Alignment.topCenter,
-              child: RichText(
-                maxLines: 15,
-                softWrap: true,
-                textAlign: TextAlign.center,
-                text: TextSpan(
-                  text: 'Recuerda que',
-                  style: TextStyle(color: objColoresAppSplash.digiNaranja, fontSize: 26),
-                  children: <TextSpan>[
-                    const TextSpan(text: ' para suscribirte al servicio debes ser', style: TextStyle(color: Colors.white, fontSize: 26)),
-                    TextSpan(text: ' autorizado',style: TextStyle(color: objColoresAppSplash.digiNaranja, fontSize: 26)),
-                    const TextSpan(text: ' por tu empleador o familiar',style: TextStyle(color: Colors.white, fontSize: 26)),
-                  ],
-                ),
-              )
-            ),
-
-
-          ]
-        ),
-      ),
-      
-      Container(
-        width: sizeScreenLst.width, 
-        height: sizeScreenLst.height,
-        //child: Image.asset('assets/SplBnv3.png',matchTextDirection: true,height: 60,),
         decoration: const BoxDecoration(
           image: DecorationImage(
              image: AssetImage('assets/SplBnv3.png'),
@@ -253,7 +155,7 @@ class SplashScreenState extends State<SplashScreen>{
               width: sizeScreenLst.width * 0.86,
               height: sizeScreenLst.height * 0.125,
               child: const AutoSizeText(
-                'Suscríbete y descubre la nueva experiencia',
+                'Suscríbete y descubre esta nueva experiencia',
                 style: TextStyle(color: Colors.white),
                 presetFontSizes: [26,24,22,20,18,16,14,12,10,8],
                 maxLines: 2,
@@ -261,43 +163,7 @@ class SplashScreenState extends State<SplashScreen>{
               ),
             ),
             
-            SizedBox(height: sizeScreenLst.height * 0.03,),//30,),
-
-            Container(
-              color: Colors.transparent,
-              height: sizeScreenLst.height * 0.2,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: 
-             
-                    CachedNetworkImage(
-                      height: sizeScreenLst.height * 0.1,//70,
-                      width: sizeScreenLst.width * 0.15,//80,
-                      placeholder: (context,url) =>
-                        Image.asset("assets/loadingEnrolApp.gif",
-                          height: 40.0,
-                          width: sizeScreenLst.width * 0.2,
-                        ),
-                        imageUrl: '${objCadConSplashScreen.endPointImagenes}IcEnRolApp.png',
-                        fadeInCurve: Curves.bounceIn,
-                        errorWidget: ((context,error,stackTrace) {
-                          return Container(
-                            color: Colors.transparent,
-                            child: Image.asset('assets/no-image.jpg'),
-                          );
-                        }
-                      ),
-                    ),
-                          
-            
-                  ),
-                ],
-              ),
-            ),
-
-            //const SizedBox(height: 30,),
-            SizedBox(height: sizeScreenLst.height * 0.03,),//30,),
+            SizedBox(height: sizeScreenLst.height * 0.22,),
 
             Expanded(
                 child: 
@@ -315,12 +181,11 @@ class SplashScreenState extends State<SplashScreen>{
                             color: objColoresAppSplash.digiNaranja,
                             child: Container( color: Colors.transparent, child: const Text('QUIERO SUSCRIBIRME',style: TextStyle(color: Colors.white, fontSize: 13))),
                             onPressed: () {
-                              /*
+                              
                               Navigator.pushReplacement(
                                 context,
-                                CupertinoPageRoute(builder: (context) => const TipoSuscriptorScreen()),
+                                CupertinoPageRoute(builder: (context) => RegistroUsuarioScreen()),
                               );
-                              */
                             }
                           ),
                         ),

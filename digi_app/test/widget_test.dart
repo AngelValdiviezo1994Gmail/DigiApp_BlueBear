@@ -8,7 +8,7 @@
 import 'package:digi_app/digimon_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
+//ignore: unused_import
 import 'package:digi_app/main.dart';
 
 void main() {
