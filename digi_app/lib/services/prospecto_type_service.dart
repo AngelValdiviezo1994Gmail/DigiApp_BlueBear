@@ -1,5 +1,4 @@
 
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:digi_app/models/index.dart';
@@ -7,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
-import 'package:intl/intl.dart';
 
 import '../_environments/index.dart';
 
@@ -182,26 +180,6 @@ class ProspectoTypeService extends ChangeNotifier{
   }
 
   registraProspecto(String nombre, String correo, String clave) async {
-/*    
-    final baseURL = '${endPoint}Clientes/CreateCliente';
-
-    final response = await http.post(
-        Uri.parse(baseURL),
-          headers: <String, String>{
-            'Content-Type': 'application/json; charset=UTF-8',
-          },
-          body: jsonEncode(<String, dynamic>
-          {
-            "fechaNacimiento": nombre,
-            "correo": correo,
-            "password": clave
-          }
-        ),
-      );
-*/
-
-//http://localhost:5000/usuarios/crear-cuenta-url/correo00@correo00.com/prueba00/123456
-
     final baseURL = '${endPoint}usuarios/crear-cuenta-url/$correo/$nombre/$clave';
 
     final response = await http.post(Uri.parse(baseURL));
@@ -210,6 +188,10 @@ class ProspectoTypeService extends ChangeNotifier{
     var reponseRs = response.body;
     final clienteRsp = ClientTypeResponse.fromJson(reponseRs);
     
+    if(clienteRsp.mensaje.isEmpty) {
+      return null;
+    }
+
     notifyListeners();
   }
 

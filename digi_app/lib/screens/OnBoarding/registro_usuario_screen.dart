@@ -392,8 +392,8 @@ class RegistroUsuarioScreenState extends State<RegistroUsuarioScreen> with Ticke
                                             child: InkWell(
                                               onTap: () async {
                                                 await clienteForm.registraProspecto(txtNombre.text, txtCorreo.text, txtClave.text);
-                                                /*
-                                                if (await clienteForm.llenaData(varObjetoProspectoFunc!)) {
+                                                
+                                                if (txtNombre.text.isNotEmpty && txtCorreo.text.isNotEmpty && txtClave.text.isNotEmpty) {
                                                   await clienteForm.registraProspecto(txtNombre.text, txtCorreo.text, txtClave.text);
 
                                                   _scaleController!.forward();
@@ -409,7 +409,6 @@ class RegistroUsuarioScreenState extends State<RegistroUsuarioScreen> with Ticke
                                                     titleTextColor: Colors.red[400],
                                                   );
                                                 }
-                                                */
                                               },
                                               child: Stack(
                                                   children: <Widget>[

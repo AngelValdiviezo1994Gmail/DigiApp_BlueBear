@@ -232,7 +232,7 @@ class PaswordEvntLog extends StatelessWidget {
                   //await Future.delayed(const Duration(seconds: 2));
                   
                   final storageLogin = const FlutterSecureStorage();
-                  String tokenUser = await storageLogin.read(key: 'jwtEnrolApp') ?? '';
+                  String tokenUser = await storageLogin.read(key: 'jwtDigimon') ?? '';
 
                   print('Token mostrar: $tokenUser');
 

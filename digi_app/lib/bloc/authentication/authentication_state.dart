@@ -98,41 +98,8 @@ class AuthenticationState extends Equatable {
         nombreSistemaOperativo = 'iOS';
       }
 
-      var inaccesoTemporal = await storage.read(key: 'inaccesoTemporal') ?? '';
-      var objLleno = await storage.read(key: 'objUsuarioLleno') ?? '';
-      if(objLleno != '') {
-        var objTmp = await storage.read(key: 'objUsuario') ?? '';
-        if(objTmp != '') 
-        {
-          objUs = UsuarioType.fromJson(objTmp);
-          objUs.tipoCliente = await storage.read(key: 'tipoCliente') ?? '';
-          bool permiteGestionPrincipalScreen = false;
 
-          tieneFeatureNotificacion = permiteGestionPrincipalScreen;
-        }
-      }
-      
-      if(inaccesoTemporal == 'S') {
-        return '';
-      } else {
-        final baseURL2 = '${endPointWorkFlow}Workflow/GetInfoCargoRolColaborador?identificacion=${objUs.identificacion}&uidCanal=${objFeatureAppAuth.featureDigiApp}';
-
-        String tokenUser = await storage.read(key: 'jwtEnrolApp') ?? '';
-
-        final responseLogin2 = await http.get(
-          Uri.parse(baseURL2),
-          headers: <String, String>{
-            'Content-Type': 'application/json; charset=UTF-8',
-            'Authorization': 'Bearer $tokenUser',
-          },
-        );
-
-        if(responseLogin2.statusCode != 200) return '';
-
-        var reponseRs2 = responseLogin2.body;
-      }
-
-      return await storage.read(key: 'jwtEnrolApp') ?? ''; 
+      return await storage.read(key: 'jwtDigimon') ?? ''; 
     }
     catch(ex) {
       return '';
@@ -165,7 +132,7 @@ class AuthenticationState extends Equatable {
       tokenUserGeneral = clienteRsp.data;
       */
 
-      storage.write(key: 'jwtEnrolApp', value: tokenUserGeneral);
+      storage.write(key: 'jwtDigimon', value: tokenUserGeneral);
 
       await readToken();
     }

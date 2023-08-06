@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -185,43 +184,18 @@ class AutenticacionService extends ChangeNotifier{
   }
 
   autenticacion(String emailEntra, String password) async { 
-    //final baseURL = '${endPointLogin}usuarios/login';
-
-/*
-    final response = await http.post(
-      Uri.parse(baseURL),      
-      body: jsonEncode(
-        <String, String>
-        {
-          "email": emailEntra,
-          "password": password
-        }
-      ),
-    );
-    */
-
     final baseURL = '${endPointLogin}usuarios/autenticar/$emailEntra/$password';//endPoint;//20
 
-    final response = await http.get(Uri.parse(baseURL));
+    final response = await http.post(Uri.parse(baseURL));
+    print('Respuesta: ${response.body}');
     if(response.statusCode != 200) return null;
 
     var reponseRs = response.body;
     final clienteRsp = ClientTypeResponse.fromJson(reponseRs);//aquí va a variar el objeto de respuesta cuando se cree el token por el api
     tokenUser = clienteRsp.token;
-    print('Ruta: $baseURL');
-    print('Usuario: $emailEntra');
-    print('Clave: $password');
-    print('Consulta token: $reponseRs');
-    storage.write(key: 'jwtEnrolApp', value: tokenUser);
-    /*
-    bool traeDataUser = false;
-    traeDataUser = await datosEmpleado(varNumIdVal);
-    
 
-    if(!traeDataUser) {
-      storage.write(key: 'jwtEnrolApp', value: '');
-    }
-*/
+    storage.write(key: 'jwtDigimon', value: tokenUser);
+    
     notifyListeners();
   }
 
@@ -238,22 +212,12 @@ class AutenticacionService extends ChangeNotifier{
   }
 
   Future logOut() async {
-    await storage.delete(key: 'jwtEnrolApp');
-    await storage.delete(key: 'objUsuario');
-    await storage.delete(key: 'objUsuarioLleno');
-    await storage.delete(key: 'objClienteEcommerce');
-    await storage.delete(key: 'direccionEscogida');
-    await storage.delete(key: 'idClienteEcommerce');
-    await storage.delete(key: 'objUsuarioCargo');
-    await storage.delete(key: 'inaccesoTemporal');
-    await storage.delete(key: 'tipoCliente');
-    await storage.delete(key: 'esEdicionData');
-    await storage.delete(key: 'cedula');
+    await storage.delete(key: 'jwtDigimon');
     return;
   }
 
   Future<String> readToken() async {
-    return await storage.read(key: 'jwtEnrolApp') ?? '';
+    return await storage.read(key: 'jwtDigimon') ?? '';
   }
 
   Future<String> readObjCliente() async {

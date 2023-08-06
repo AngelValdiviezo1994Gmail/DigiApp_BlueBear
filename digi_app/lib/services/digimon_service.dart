@@ -89,9 +89,7 @@ class DigimonService extends ChangeNotifier{
       if(varResponse.statusCode != 200) return null;
 
       final prospRsp = DigimonModel.fromJson(varResponse.body);
-      digiModel = prospRsp;
-      
-      notifyListeners();
+      return prospRsp;
     }
     on SocketException catch (_) {
       Fluttertoast.showToast(

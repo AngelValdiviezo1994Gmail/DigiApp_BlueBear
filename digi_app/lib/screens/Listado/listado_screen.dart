@@ -10,6 +10,8 @@ const cellGrey = Color(0xffcfd4e0);
 const cellBlue = Color(0xff1553be);
 const background = Color(0xff242830);
 
+ColoresApp objColoresListado = ColoresApp();
+
 class ListadoDigimons extends StatelessWidget {
   const ListadoDigimons({Key? key}) : super(key: key);
 
@@ -55,18 +57,138 @@ class ListadoDigimons extends StatelessWidget {
                 ],
                 children: [
                   // Column 1
-                  gridArea('r').containing(Container(color: cellRed)),
-                  gridArea('y').containing(Container(color: cellMustard)),
+                  gridArea('r').containing(
+                    Container(
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: NetworkImage(objDigimons.content[0].image),
+                          fit: BoxFit.contain
+                        ),
+                        borderRadius: const BorderRadius.all(Radius.circular(20)),
+                        border: Border.all(
+                          width: 3,
+                          color: objColoresListado.digiNaranja,//varIndexMenu == -1 ? objColoresAppPrincipal.naranjaRiasem : Colors.black,
+                          style: BorderStyle.solid,
+                        ),
+                      ),
+                    )
+                  ),
+                  gridArea('y').containing(
+                    Container(
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: NetworkImage(objDigimons.content[1].image),
+                          fit: BoxFit.contain
+                        ),
+                        borderRadius: const BorderRadius.all(Radius.circular(20)),
+                        border: Border.all(
+                          width: 3,
+                          color: objColoresListado.digiNaranja,//varIndexMenu == -1 ? objColoresAppPrincipal.naranjaRiasem : Colors.black,
+                          style: BorderStyle.solid,
+                        ),
+                      ),
+                    )
+                  ),
                   // Column 2
-                  gridArea('R').containing(Container(color: cellRed)),
+                  gridArea('R').containing(
+                    Container(
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: NetworkImage(objDigimons.content[2].image),
+                          fit: BoxFit.contain
+                        ),
+                        borderRadius: const BorderRadius.all(Radius.circular(20)),
+                        border: Border.all(
+                          width: 3,
+                          color: objColoresListado.digiNaranja,//varIndexMenu == -1 ? objColoresAppPrincipal.naranjaRiasem : Colors.black,
+                          style: BorderStyle.solid,
+                        ),
+                      ),
+                    )
+                  ),
                   // Column 3
-                  gridArea('B').containing(Container(color: cellBlue)),
-                  gridArea('Y').containing(Container(color: cellMustard)),
-                  gridArea('g').containing(Container(color: cellGrey)),
+                  gridArea('B').containing(
+                    Container(
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: NetworkImage(objDigimons.content[3].image),
+                          fit: BoxFit.contain
+                        ),
+                        borderRadius: const BorderRadius.all(Radius.circular(20)),
+                        border: Border.all(
+                          width: 3,
+                          color: objColoresListado.digiNaranja,//varIndexMenu == -1 ? objColoresAppPrincipal.naranjaRiasem : Colors.black,
+                          style: BorderStyle.solid,
+                        ),
+                      ),
+                    )
+                  ),
+                  gridArea('Y').containing(
+                    Container(
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: NetworkImage(objDigimons.content[4].image),
+                          fit: BoxFit.contain
+                        ),
+                        borderRadius: const BorderRadius.all(Radius.circular(20)),
+                        border: Border.all(
+                          width: 3,
+                          color: objColoresListado.digiNaranja,//varIndexMenu == -1 ? objColoresAppPrincipal.naranjaRiasem : Colors.black,
+                          style: BorderStyle.solid,
+                        ),
+                      ),
+                    )
+                  ),
+                  gridArea('g').containing(
+                    Container(
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: NetworkImage(objDigimons.content[5].image),
+                          fit: BoxFit.contain
+                        ),
+                        borderRadius: const BorderRadius.all(Radius.circular(20)),
+                        border: Border.all(
+                          width: 3,
+                          color: objColoresListado.digiNaranja,//varIndexMenu == -1 ? objColoresAppPrincipal.naranjaRiasem : Colors.black,
+                          style: BorderStyle.solid,
+                        ),
+                      ),
+                    )
+                  ),
                   // Column 4
-                  gridArea('b').containing(Container(color: cellBlue)),
+                  gridArea('b').containing(
+                    Container(
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: NetworkImage(objDigimons.content[6].image),
+                          fit: BoxFit.contain
+                        ),
+                        borderRadius: const BorderRadius.all(Radius.circular(20)),
+                        border: Border.all(
+                          width: 3,
+                          color: objColoresListado.digiNaranja,//varIndexMenu == -1 ? objColoresAppPrincipal.naranjaRiasem : Colors.black,
+                          style: BorderStyle.solid,
+                        ),
+                      ),
+                    )
+                  ),
                   // Column 5
-                  gridArea('yy').containing(Container(color: cellMustard)),
+                  gridArea('yy').containing(
+                    Container(
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: NetworkImage(objDigimons.content[7].image),
+                          fit: BoxFit.contain
+                        ),
+                        borderRadius: const BorderRadius.all(Radius.circular(20)),
+                        border: Border.all(
+                          width: 3,
+                          color: objColoresListado.digiNaranja,//varIndexMenu == -1 ? objColoresAppPrincipal.naranjaRiasem : Colors.black,
+                          style: BorderStyle.solid,
+                        ),
+                      ),
+                    )
+                  ),
                 ],
               ),
             );
