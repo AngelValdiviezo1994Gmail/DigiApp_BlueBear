@@ -1,7 +1,8 @@
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:digi_app/models/index.dart';
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
+import 'package:pinch_zoom/pinch_zoom.dart'; 
 
 DigimonDetalleModel? objDigimon;
 ColoresApp objColoresModals = ColoresApp();
@@ -52,18 +53,20 @@ class ModalDetalleDigimon extends StatelessWidget {
               color: Colors.transparent,
               width: 200,
               height: 200,
-              child: Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: NetworkImage(objDigimon!.images[0].href),
-                    fit: BoxFit.contain
-                  ),
-
-                  borderRadius: const BorderRadius.all(Radius.circular(350)),
-                  border: Border.all(
-                    width: 2,
-                    color: objColoresModals.digiNaranja,
-                    style: BorderStyle.solid,
+              child: PinchZoom(
+                child: Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: NetworkImage(objDigimon!.images[0].href),
+                      fit: BoxFit.contain
+                    ),
+              
+                    borderRadius: const BorderRadius.all(Radius.circular(350)),
+                    border: Border.all(
+                      width: 2,
+                      color: objColoresModals.digiNaranja,
+                      style: BorderStyle.solid,
+                    ),
                   ),
                 ),
               ),
