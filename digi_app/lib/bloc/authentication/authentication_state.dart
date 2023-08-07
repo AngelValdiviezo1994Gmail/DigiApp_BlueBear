@@ -100,8 +100,9 @@ class AuthenticationState extends Equatable {
 
       String token = await storage.read(key: 'jwtDigimon') ?? '';
       String correo = await storage.read(key: 'correoUser') ?? '';
+      String respuesta = token.isNotEmpty ? '$token|$correo' : '';
 
-      return '$token|$correo'; 
+      return respuesta; 
     }
     catch(ex) {
       return '';

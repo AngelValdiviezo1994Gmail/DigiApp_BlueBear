@@ -123,13 +123,12 @@ class ModalDetalleDigimon extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
 
-                      if(objDigimon != null && objDigimon!.levels.length > 0)
                       Container(
                         width: size.width * 0.15,
                         color: Colors.transparent,
                         alignment: Alignment.center,
                         child: AutoSizeText(
-                          '${objDigimon?.levels[0].level}',
+                          objDigimon != null && objDigimon!.levels.length > 0 ? '${objDigimon?.levels[0].level}' : '---------',
                           style: TextStyle(color: Colors.black,fontFamily: 'Montserrat', fontWeight: FontWeight.bold),
                           maxLines: 2,
                           presetFontSizes: const [16,14,12,10],
@@ -137,27 +136,12 @@ class ModalDetalleDigimon extends StatelessWidget {
                         ),
                       ),
                       
-                      if(objDigimon == null || objDigimon!.levels.length == 0)
-                      Container(
-                        width: size.width * 0.15,
-                        color: Colors.transparent,
-                        alignment: Alignment.center,
-                        child: AutoSizeText(
-                          '---------',
-                          style: TextStyle(color: Colors.black,fontFamily: 'Montserrat', fontWeight: FontWeight.bold),
-                          maxLines: 2,
-                          presetFontSizes: const [16,14,12,10],
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                      
-                      if(objDigimon != null && objDigimon!.attributes.length > 0)
                       Container(
                         width: size.width * 0.17,
                         color: Colors.transparent,
                         alignment: Alignment.center,
                         child: AutoSizeText(
-                          '${objDigimon?.attributes[0].attribute}',
+                          objDigimon != null && objDigimon!.attributes.length > 0 ? '${objDigimon?.attributes[0].attribute}' : '---------',
                           style: TextStyle(color: Colors.black,fontFamily: 'Montserrat', fontWeight: FontWeight.bold),
                           maxLines: 2,
                           presetFontSizes: const [16,14,12,10],
@@ -165,27 +149,12 @@ class ModalDetalleDigimon extends StatelessWidget {
                         ),
                       ),
                       
-                      if(objDigimon == null || objDigimon!.attributes.length == 0)
-                      Container(
-                        width: size.width * 0.15,
-                        color: Colors.transparent,
-                        alignment: Alignment.center,
-                        child: AutoSizeText(
-                          '---------',
-                          style: TextStyle(color: Colors.black,fontFamily: 'Montserrat', fontWeight: FontWeight.bold),
-                          maxLines: 2,
-                          presetFontSizes: const [16,14,12,10],
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-
-                      if(objDigimon != null && objDigimon!.types.length > 0)
                       Container(
                         width: size.width * 0.18,
                         color: Colors.transparent,
                         alignment: Alignment.center,
                         child: AutoSizeText(
-                          '${objDigimon?.types[0].type}',
+                          objDigimon != null && objDigimon!.types.length > 0 ? '${objDigimon?.types[0].type}' : '---------',
                           style: TextStyle(color: Colors.black,fontFamily: 'Montserrat', fontWeight: FontWeight.bold),
                           maxLines: 2,
                           presetFontSizes: const [16,14,12,10],
@@ -193,19 +162,6 @@ class ModalDetalleDigimon extends StatelessWidget {
                         ),
                       ),
 
-                      if(objDigimon == null || objDigimon!.types.length == 0)
-                      Container(
-                        width: size.width * 0.15,
-                        color: Colors.transparent,
-                        alignment: Alignment.center,
-                        child: AutoSizeText(
-                          '---------',
-                          style: TextStyle(color: Colors.black,fontFamily: 'Montserrat', fontWeight: FontWeight.bold),
-                          maxLines: 2,
-                          presetFontSizes: const [16,14,12,10],
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
                     ],
                   ),
                 

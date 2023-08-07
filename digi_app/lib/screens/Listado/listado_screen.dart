@@ -111,6 +111,7 @@ class ListadoDigimons extends StatelessWidget {
   }
 }
 
+//ignore: must_be_immutable
 class DigimonData extends StatelessWidget {
   DigiDataModel? objPrd;
 

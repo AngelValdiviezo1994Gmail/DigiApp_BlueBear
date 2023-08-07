@@ -219,7 +219,7 @@ class PaswordEvntLog extends StatelessWidget {
                 if (!loginForm.varIsLoading) {
                   FocusScope.of(context).unfocus();
                   loginForm.varIsLoading = true;
-                  if (loginForm.passWord == '') {
+                  if (loginForm.passWord.isEmpty) {
                     loginForm.varIsLoading = false;
                     Navigator.push(
                       context,
@@ -227,7 +227,7 @@ class PaswordEvntLog extends StatelessWidget {
                     );
                     return;
                   }
-                  await loginForm.autenticacion(CorreoUsuario, loginForm.passWord);
+                  await loginForm.autenticacion(CorreoUsuario.trim(), loginForm.passWord.trim());
 
                   //await Future.delayed(const Duration(seconds: 2));
                   
