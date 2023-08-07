@@ -302,19 +302,19 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.2.0"
+  flutter_staggered_grid_view:
+    dependency: "direct main"
+    description:
+      name: flutter_staggered_grid_view
+      sha256: "19e7abb550c96fbfeb546b23f3ff356ee7c59a019a651f8f102a4ba9b7349395"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.7.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_wall_layout:
-    dependency: "direct main"
-    description:
-      name: flutter_wall_layout
-      sha256: "321dc9bfa85705c43908b0ce73b57f5c5cdccbb931e52f7f6faa6d681df4f42b"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.1.1"
   flutter_web_plugins:
     dependency: transitive
     description: flutter

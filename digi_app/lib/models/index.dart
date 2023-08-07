@@ -1,3 +1,5 @@
+export 'package:digi_app/models/detalle_digimon_model.dart';
+
 export 'package:digi_app/models/usuario_type_response.dart';
 
 export 'package:digi_app/models/client_type_response.dart';

@@ -90,9 +90,7 @@ class PrincipalScreenState extends State<PrincipalScreen> {
                                         width: sizePrincipal.width * 0.41,
                                         height: sizePrincipal.height * 0.15,
                                         child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment
-                                                  .spaceBetween,
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
                                             Container(
                                               color: Colors.transparent,
@@ -183,7 +181,7 @@ class PrincipalScreenState extends State<PrincipalScreen> {
                                 )),
                           ]),
                     );
-                  
+                
                 },
               ),
           

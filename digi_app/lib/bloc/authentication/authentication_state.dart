@@ -98,8 +98,10 @@ class AuthenticationState extends Equatable {
         nombreSistemaOperativo = 'iOS';
       }
 
+      String token = await storage.read(key: 'jwtDigimon') ?? '';
+      String correo = await storage.read(key: 'correoUser') ?? '';
 
-      return await storage.read(key: 'jwtDigimon') ?? ''; 
+      return '$token|$correo'; 
     }
     catch(ex) {
       return '';

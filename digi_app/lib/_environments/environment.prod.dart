@@ -28,4 +28,5 @@ class CadenaConexion {
   final String apiEndPointEvalCore = 'https://apievalcore.enrolapp.ec/api/v1/';
   final String apiLogin = 'https://crm-backend-delta.vercel.app/';
   final String apiDigimons = 'https://digi-api.com/api/v1/digimon';
+  final String apiDetalleDigimons = 'https://www.digi-api.com/api/v1';
 }

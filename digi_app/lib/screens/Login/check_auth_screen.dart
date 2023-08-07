@@ -33,8 +33,10 @@ class CheckAuthScreen extends StatelessWidget {
                   );
                 } else {
                   if(snapshot.data != '') {
+                    String datos = snapshot.data!.split('|')[0];
+                    String correoGuardado = snapshot.data!.split('|')[1];
 
-                    if(snapshot.data == 'NI') {
+                    if(datos == 'NI') {
                         Future.microtask(() => 
                           Navigator.of(context, rootNavigator: true).pushReplacement(
                             CupertinoPageRoute<bool>(
@@ -49,7 +51,7 @@ class CheckAuthScreen extends StatelessWidget {
                             Navigator.of(context, rootNavigator: true).pushReplacement(
                               CupertinoPageRoute<bool>(
                                 fullscreenDialog: true,
-                                builder: (BuildContext context) => PrincipalScreen(),
+                                builder: (BuildContext context) => PrincipalScreen(correo: correoGuardado,),
                               ),
                             )
                           );
